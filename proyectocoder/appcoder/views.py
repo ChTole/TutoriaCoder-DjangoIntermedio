@@ -144,7 +144,7 @@ def login_request(request):
             return redirect('Login')
     form = AuthenticationForm()
     ctx = {"form": form}
-    return render(request, "appcoder/login.html", ctx)  
+    return render(request, "appcoder/registro/login.html", ctx)  
 
 # USUARIOS
 
@@ -157,7 +157,15 @@ def register(request):
             return render(request, 'appcoder/inicio.html', {"mensaje": "Usuario creado!!!"})    
     else:
         form = UserRegisterForm()
-    return render(request,"appcoder/registro.html", {"form": form})
+    return render(request,"appcoder/registro/registro.html", {"form": form})
 
 def editar_perfil(request):
-    pass
+    usuario = request.user
+    if request.method == "POST":
+        form = UserEditForm(request.POST, instance=usuario)
+        if form.is_valid:       
+            form.save()
+            return redirect('inicio')
+    form = UserEditForm(instance=usuario)                 # muestro lo datos cargados del profesor a modificar
+    ctx = {"form": form}
+    return render(request, "appcoder/registro/editar_perfil.html", ctx)    
