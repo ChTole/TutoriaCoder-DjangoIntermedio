@@ -166,6 +166,6 @@ def editar_perfil(request):
         if form.is_valid:       
             form.save()
             return redirect('inicio')
-    form = UserEditForm(instance=usuario)                 # muestro lo datos cargados del profesor a modificar
+    form = UserEditForm(instance=usuario)                 # muestro lo datos cargados del usuario a modificar
     ctx = {"form": form}
     return render(request, "appcoder/registro/editar_perfil.html", ctx)    
