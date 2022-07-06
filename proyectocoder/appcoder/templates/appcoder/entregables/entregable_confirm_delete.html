@@ -1,0 +1,16 @@
+{% extends "appcoder/inicio.html" %}
+
+{% load static %}
+
+{% block title %}
+Entregables - Crear
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-5">Entregable - ELIMINAR!</h1>
+<form method="post">
+    {% csrf_token %}
+    ¿Confirma eliminación de "{{ object }}"?
+    <input type="submit" value="Eliminar">
+</form>
+{% endblock %}

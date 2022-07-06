@@ -1,0 +1,56 @@
+{% extends "appcoder/inicio.html" %}
+
+{% load static %}
+
+{% block title %}
+Profesores
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-5">Profesores</h1>
+<br>
+<a href="{% url 'crear_profesor' %}">Ingresar nuevo profesor</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">e-m@il</th>
+            <th scope="col">Profesión</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for profesor in profesores %}
+        <tr>
+            <th scope="row">{{ profesor.id}}</th>
+            <td>{{ profesor.nombre }}</td>
+            <td>{{ profesor.apellido }}</td>
+            <td>{{ profesor.email }}</td>
+            <td>{{ profesor.profesion }}</td>
+            <td>
+                <a href="{% url 'modificar_profesor' profesor.id %}"># Modificar</a>
+                <a href="{% url 'eliminar_profesor' profesor.id %}">- Eliminar</a>
+            </td>
+        </tr>   
+    {% endfor %}
+    </tbody>
+  </table>
+  <br>
+  <form method="post">
+    <p>Búsqueda rápida
+        {% csrf_token %}
+        <input type="text" name="elemento" id="" min="0">
+        <input type="submit" value="Buscar">
+    </p>
+    {% if buscar %}
+        <p>Resultados: </p>
+            <ul>
+                {% for resultado in buscar %}
+                    <li>{{resultado.nombre}} {{ resultado.apellido }} {{ resultado.email }}</li>
+                {% endfor %}
+            </ul>
+    {% endif %}
+  </form>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "appcoder/inicio.html" %}
+
+{% load static %}
+
+{% block title %}
+Cursos
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-5">Cursos disponibles</h1>
+<br>
+<a href="{% url 'crear_curso' %}">Ingresar nuevo curso</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre del curso</th>
+            <th scope="col">Comisión N°</th>
+            <th scope="col">Profesor</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for curso in cursos %}
+        <tr>
+            <th scope="row">{{ curso.id}}</th>
+            <td>{{ curso.nombre }}</td>
+            <td>{{ curso.camada }}</td>
+            <td>{{ curso.profesor }}</td>
+        </tr>   
+    {% endfor %}
+    </tbody>
+  </table>
+  <br>
+  <form method="post">
+    <p>Búsqueda rápida
+        {% csrf_token %}
+        <input type="text" name="elemento" id="" min="0">
+        <input type="submit" value="Buscar">
+    </p>
+    {% if buscar %}
+        <p>Resultados: </p>
+            <ul>
+                {% for resultado in buscar %}
+                    <li>{{resultado.nombre}} [{{ resultado.camada }}]</li>
+                {% endfor %}
+            </ul>
+    {% endif %}
+  </form>
+{% endblock %}

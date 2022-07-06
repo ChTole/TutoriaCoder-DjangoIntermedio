@@ -1,0 +1,49 @@
+{% extends "appcoder/inicio.html" %}
+
+{% load static %}
+
+{% block title %}
+Estudiantes
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-5">Estudiantes</h1>
+<a href="{% url 'crear_estudiante' %}">Ingresar nuevo estudiante</a>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">e-m@il</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for estudiante in estudiantes %}
+        <tr>
+            <th scope="row">{{ estudiante.id}}</th>
+            <td>{{ estudiante.nombre }}</td>
+            <td>{{ estudiante.apellido }}</td>
+            <td>{{ estudiante.email }}</td>
+        </tr>   
+        {% endfor %}
+    </tbody>
+  </table>
+  <br>
+  <form method="post">
+    <p>Búsqueda rápida
+        {% csrf_token %}
+        <input type="text" name="elemento" id="" min="0">
+        <input type="submit" value="Buscar">
+    </p>
+    {% if buscar %}
+        <p>Resultados: </p>
+            <ul>
+                {% for resultado in buscar %}
+                    <li>{{resultado.nombre}} {{ resultado.apellido }} {{ resultado.email }}</li>
+                {% endfor %}
+            </ul>
+    {% endif %}
+  </form>
+{% endblock %}

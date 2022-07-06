@@ -1,0 +1,18 @@
+{% extends "appcoder/inicio.html" %}
+
+{% load static %}
+
+{% block title %}
+Entregables - Detalle
+{% endblock %}
+
+{% block content %}
+
+<p>Entrega: {{ entregable.nombre }} </p>
+<p>Fecha de entrega: {{ entregable.fecha_de_entrega }} </p>
+<p>Entregado: {{ entregable.entregado }} </p>
+<br>
+<a href="{% url 'list' %}">Volver a entregables</a>
+
+
+{% endblock %}

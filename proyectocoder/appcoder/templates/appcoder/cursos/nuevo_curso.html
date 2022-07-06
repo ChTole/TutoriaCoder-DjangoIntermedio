@@ -1,0 +1,16 @@
+{% extends "appcoder/inicio.html" %}
+
+{% load static %}
+
+{% block title %}
+Ingresar cursos
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-5">Ingresar nuevo curso</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Guardar cambios</button>
+</form>
+{% endblock %}

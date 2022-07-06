@@ -1,0 +1,23 @@
+{% extends "appcoder/inicio.html" %}
+
+{% load static %}
+
+{% block title %}
+Entregables
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-5">Entregables</h1>
+<br>
+<a href="{% url 'New' %}">Ingresar nuevo entregable</a>
+<br>
+{% for entregable in object_list %}
+    <p>Entrega: {{ entregable.nombre }} </p>
+    <p>
+        <a href="{% url 'Detail' entregable.id %}">Ver</a>
+        <a href="{% url 'Edit' entregable.id %}">Modificar</a>
+        <a href="{% url 'Delete' entregable.id %}">Eliminar</a>
+    </p>
+{% endfor %}
+
+{% endblock %}
